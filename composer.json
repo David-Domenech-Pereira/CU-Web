@@ -1,0 +1,17 @@
+{
+  "name": "urv/cuweb",
+  "description": "Pràctica de computació ubiqua",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Entity\\": "Entity/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8"
+  }
+}
