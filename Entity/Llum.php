@@ -1,11 +1,12 @@
 <?php
 namespace Entity;
 class Llum {
+    public const NUM_LLUMS = 3;
     private int $colorR;
     private int $colorG;
     private int $colorB;
     private int $intensitat;
-    private boolean $teColor;
+    private bool $teColor;
 
     public function getcolorR(){
         return $this->colorR;
@@ -43,7 +44,7 @@ class Llum {
         return $this->teColor;
     }
 
-    public function setTeColor(boolean $teColor ){
+    public function setTeColor(bool $teColor ){
         $this->teColor=$teColor;
     }
 
