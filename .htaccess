@@ -1,0 +1,30 @@
+# Habilitar el motor de reescritura
+RewriteEngine On
+
+# Establecer permisos para que los archivos sean accesibles
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+# Habilitar la visualización de errores en desarrollo
+php_flag display_errors On
+php_value error_reporting -1
+
+# Configurar índices predeterminados
+DirectoryIndex index.php index.html
+
+# Asegurarse de que el acceso al directorio esté permitido
+<IfModule mod_autoindex.c>
+    Options +Indexes
+</IfModule>
+
+# Bloquear acceso a archivos sensibles como .htaccess
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Permitir acceso a archivos específicos
+<Files "input.php">
+    Require all granted
+</Files>

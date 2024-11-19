@@ -1,5 +1,6 @@
 <?php
 //Lògica del main
+require 'vendor/autoload.php';  //comunica al php que existeixen les classes
 
 
 use Entity\ArduinoAdapter;
@@ -8,6 +9,11 @@ use Entity\Llum;
 use Entity\PhilipsAdapter;
 
 $body= file_get_contents('php://input'); //Recogemos el body de la petición que hemos recibido en el input
+//echo $body;
+////ho escrivim en un fitxer
+//$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+//fwrite($myfile, $body);
+//fclose($myfile);
 
 $arduinoadapter = new ArduinoAdapter(); //Creamos un objeto de la clase ArduinoAdapter
 
@@ -31,7 +37,7 @@ $llumSend = [];
 for ($i=0; $i < Llum::NUM_LLUMS; $i++) {
     $llumSend[$i] = new Llum();
     $llumSend[$i]->setIntensitat($intensityToSend);
-    $llumSend[$i]->setTeColor($i != 2);
+    $llumSend[$i]->setTeColor($i == 2);
 
     if ($llumSend[$i]->getTeColor()) {
         $llumSend[$i]->setcolorR($color->getRed());

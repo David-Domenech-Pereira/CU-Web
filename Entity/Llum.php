@@ -36,8 +36,8 @@ class Llum {
         return $this->intensitat;
     }
 
-    public function setIntensitat(int $intensitat){
-        $this->intensitat=$intensitat;
+    public function setIntensitat(float $intensitat){
+        $this->intensitat=round($intensitat);
     }
 
     public function getTeColor(){
