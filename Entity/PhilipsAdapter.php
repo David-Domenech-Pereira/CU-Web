@@ -16,7 +16,7 @@ class PhilipsAdapter implements LightsAdapter {
              */
             $urlToSend = $url.self::LLUMS_IDS[$i]."/state";
             $content = [];
-            $content["on"] = true;
+            $content["on"] = !($llum->getIntensitat() === 0);
             $content["bri"] = $llum->getIntensitat();
             if ($llum->getTeColor()) {
                 $content["xy"] = $this->convertRGBToXY($llum->getcolorR(), $llum->getcolorG(), $llum->getcolorB());

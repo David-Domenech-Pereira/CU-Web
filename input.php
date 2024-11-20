@@ -7,6 +7,7 @@ use Entity\ArduinoAdapter;
 use Entity\ColorCalculation\ColorCalculationService;
 use Entity\Llum;
 use Entity\PhilipsAdapter;
+use Entity\ThermSensation\ThermSensationCalculationService;
 
 $body= file_get_contents('php://input'); //Recogemos el body de la petición que hemos recibido en el input
 //echo $body;
@@ -19,12 +20,8 @@ $arduinoadapter = new ArduinoAdapter(); //Creamos un objeto de la clase ArduinoA
 
 $ambient = $arduinoadapter->adapt($body); //Llamamos al método parse de la clase ArduinoAdapter y le pasamos el body de la petición
 
-$sensacioTermica=-42.379+ 2.04901523*$ambient->getTemp() + 10.14333127*$ambient->getHumitat() -
-    0.2475541*$ambient->getTemp() - 6.83783*pow(10,-2)*pow($ambient->getTemp(),2) -
-    5.481717*pow(10,-2)*pow($ambient->getHumitat(),2) +
-    1.22874*pow(10,-2)*pow($ambient->getTemp(),2)*$ambient->getHumitat() +
-    8.5282*pow(10,-4)*$ambient->getTemp()*pow($ambient->getHumitat(),2) -
-    1.99*pow(10,-6)*pow($ambient->getTemp(),2)*pow($ambient->getHumitat(),2);
+$thermCalculationService = new ThermSensationCalculationService();
+$sensacioTermica = $thermCalculationService->execute($ambient);
 
 $hora = date('H');
 
