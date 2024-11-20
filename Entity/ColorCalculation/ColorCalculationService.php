@@ -24,7 +24,7 @@ class ColorCalculationService
      */
 
     const COLOR_BLAU = [0, 0, 255];
-    const COLOR_LILA = [255, 0, 255];
+    const COLOR_LILA = [236, 14, 243];
     const COLOR_VERD = [0, 255, 0];
     const COLOR_FRED_NIT = [241, 102, 64]; //fred
     const COLOR_NORMAL_NIT = [243, 94, 14]; //normal
