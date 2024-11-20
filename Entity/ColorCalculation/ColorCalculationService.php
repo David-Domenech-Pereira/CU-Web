@@ -38,11 +38,13 @@ class ColorCalculationService
         $horaActual = $h;
         if($horaActual >= self::HORA_SURT_SOL && $horaActual < self::HORA_POSA_SOL) {
             $color = $this->generateDayColour($sensacioTermica);
+            $tipusLlumunositat = 20;
         } else {
             $color = $this->generateNightColour($sensacioTermica);
+            $tipusLlumunositat = 80;
         }
 
-        return new ColorCalculationResponse($color[0], $color[1], $color[2]);
+        return new ColorCalculationResponse($color[0], $color[1], $color[2], $tipusLlumunositat);
     }
 
     private function generateDayColour(float $sensacioTermica): array

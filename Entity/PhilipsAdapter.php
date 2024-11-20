@@ -18,8 +18,10 @@ class PhilipsAdapter implements LightsAdapter {
             $content = [];
             $content["on"] = !($llum->getIntensitat() === 0);
             $content["bri"] = $llum->getIntensitat();
-            if ($llum->getTeColor()) {
+            if ($i == 2) {
                 $content["xy"] = $this->convertRGBToXY($llum->getcolorR(), $llum->getcolorG(), $llum->getcolorB());
+            }else{
+                $content["ct"] = $this->convertToCT($llum->getTipusLlumunositat());
             }
 
             //enviem PUT
@@ -71,6 +73,11 @@ class PhilipsAdapter implements LightsAdapter {
             round($x,4),
             round($y,4)
         ];
+    }
+
+    private function convertToCT(int $tipusLlumunositat)
+    {
+        return round(153 + (($tipusLlumunositat * 301) / 100));
     }
 
 }

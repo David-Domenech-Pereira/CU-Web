@@ -7,6 +7,7 @@ class Llum {
     private int $colorB;
     private int $intensitat;
     private bool $teColor;
+    private int $tipusLlumunositat; //Valor entre 0 i 100
 
     public function getcolorR(){
         return $this->colorR;
@@ -48,6 +49,19 @@ class Llum {
         $this->teColor=$teColor;
     }
 
+    public function getTipusLlumunositat(){
+        return $this->tipusLlumunositat;
+    }
+
+    public function setTipusLlumunositat(int $tipusLlumunositat){
+        if($tipusLlumunositat<0){
+            $tipusLlumunositat=0;
+        }else if($tipusLlumunositat>100){
+            $tipusLlumunositat=100;
+        }
+
+        $this->tipusLlumunositat=$tipusLlumunositat;
+    }
     
 }
 

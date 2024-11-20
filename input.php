@@ -34,13 +34,12 @@ $llumSend = [];
 for ($i=0; $i < Llum::NUM_LLUMS; $i++) {
     $llumSend[$i] = new Llum();
     $llumSend[$i]->setIntensitat($intensityToSend);
-    $llumSend[$i]->setTeColor($i == 2);
 
-    if ($llumSend[$i]->getTeColor()) {
-        $llumSend[$i]->setcolorR($color->getRed());
-        $llumSend[$i]->setcolorG($color->getGreen());
-        $llumSend[$i]->setcolorB($color->getBlue());
-    }
+    $llumSend[$i]->setcolorR($color->getRed());
+    $llumSend[$i]->setcolorG($color->getGreen());
+    $llumSend[$i]->setcolorB($color->getBlue());
+
+    $llumSend[$i]->setTipusLlumunositat($color->getTipusLlumunositat());
 }
 
 
