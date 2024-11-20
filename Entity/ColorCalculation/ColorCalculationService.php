@@ -10,23 +10,13 @@ class ColorCalculationService
      * Normal: Entre 17 i 25 graus
      * Fred: Menys de 17 graus
      */
-    const TEMP_NORMAL_CALOR = 40;
-    const TEMP_FRED_NORMAL = 30;
-    /*
-     * Referència de colors:
-     *
-     * Blau: (0, 0, 255)
-     * Lila: (255, 0, 255)
-     * Verd: (0, 255, 0)
-     * Lila-Grana-Vermell-Taronja: (255, 0, 0)
-     * Vermell-Taronja: (255, 128, 0)
-     * Rosa: (255, 0, 128)
-     */
+    const TEMP_NORMAL_CALOR = 25;
+    const TEMP_FRED_NORMAL = 17;
 
     const COLOR_BLAU = [0, 0, 255];
-    const COLOR_LILA = [184, 28, 203];
+    const COLOR_LILA = [140, 14, 255];
     const COLOR_VERD = [0, 255, 0];
-    const COLOR_FRED_NIT = [241, 102, 64]; //fred
+    const COLOR_FRED_NIT = [255, 0, 0]; //fred
     const COLOR_NORMAL_NIT = [243, 94, 14]; //normal
     const COLOR_CALOR_NIT = [177, 63, 137]; //calor
 

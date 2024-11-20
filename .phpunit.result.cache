@@ -1,1 +1,1 @@
-{"version":1,"defects":{"ThermSensation\\ThermSensationCalculationServiceTest::testExecute":7},"times":{"ThermSensation\\ThermSensationCalculationServiceTest::testExecute":0.004}}
+{"version":1,"defects":{"ThermSensation\\ThermSensationCalculationServiceTest::testExecute":7,"ColorCalculation\\ColorCalculationServiceTest::testExecute":8},"times":{"ThermSensation\\ThermSensationCalculationServiceTest::testExecute":0.004,"ColorCalculation\\ColorCalculationServiceTest::testExecute":0.004}}

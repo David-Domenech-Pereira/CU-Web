@@ -20,8 +20,12 @@ $arduinoadapter = new ArduinoAdapter(); //Creamos un objeto de la clase ArduinoA
 
 $ambient = $arduinoadapter->adapt($body); //Llamamos al método parse de la clase ArduinoAdapter y le pasamos el body de la petición
 
-$thermCalculationService = new ThermSensationCalculationService();
-$sensacioTermica = $thermCalculationService->execute($ambient);
+if ($ambient->getTemp() > 15) {
+    $thermCalculationService = new ThermSensationCalculationService();
+    $sensacioTermica = $thermCalculationService->execute($ambient);
+}else{
+    $sensacioTermica = $ambient->getTemp();
+}
 
 $hora = date('H');
 
