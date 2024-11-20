@@ -26,9 +26,9 @@ class ColorCalculationService
     const COLOR_BLAU = [0, 0, 255];
     const COLOR_LILA = [255, 0, 255];
     const COLOR_VERD = [0, 255, 0];
-    const COLOR_LILA_GRANA_VERMELL_TARONJA = [255, 0, 0];
-    const COLOR_VERMELL_TARONJA = [255, 128, 0];
-    const COLOR_ROSA = [255, 0, 128];
+    const COLOR_FRED_NIT = [241, 102, 64]; //fred
+    const COLOR_NORMAL_NIT = [243, 94, 14]; //normal
+    const COLOR_CALOR_NIT = [177, 63, 137]; //calor
 
     const HORA_SURT_SOL = 6;
     const HORA_POSA_SOL = 20;
@@ -61,11 +61,11 @@ class ColorCalculationService
     private function generateNightColour(float $sensacioTermica): array
     {
         if ($sensacioTermica >= self::TEMP_NORMAL_CALOR) {
-            return self::COLOR_LILA_GRANA_VERMELL_TARONJA;
+            return self::COLOR_CALOR_NIT;
         } elseif ($sensacioTermica < self::TEMP_FRED_NORMAL) {
-            return self::COLOR_ROSA;
+            return self::COLOR_FRED_NIT;
         } else {
-            return self::COLOR_VERMELL_TARONJA;
+            return self::COLOR_NORMAL_NIT;
         }
     }
 }
