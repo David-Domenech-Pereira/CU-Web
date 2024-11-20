@@ -11,7 +11,7 @@ class ColorCalculationService
      * Fred: Menys de 17 graus
      */
     const TEMP_NORMAL_CALOR = 40;
-    const TEMP_FRED_NORMAL = 30;
+    const TEMP_FRED_NORMAL = 0;
     /*
      * Referència de colors:
      *
