@@ -10,8 +10,8 @@ class ColorCalculationService
      * Normal: Entre 17 i 25 graus
      * Fred: Menys de 17 graus
      */
-    const TEMP_NORMAL_CALOR = 25;
-    const TEMP_FRED_NORMAL = 17;
+    const TEMP_NORMAL_CALOR = 40;
+    const TEMP_FRED_NORMAL = 30;
     /*
      * Referència de colors:
      *
