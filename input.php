@@ -23,7 +23,7 @@ $ambient = $arduinoadapter->adapt($body); //Llamamos al método parse de la clas
 $thermCalculationService = new ThermSensationCalculationService();
 $sensacioTermica = $thermCalculationService->execute($ambient);
 
-$hora = date('H');
+$hora = "21";
 
 $colorCalculationService = new ColorCalculationService();
 $color = $colorCalculationService->execute($sensacioTermica, $hora);
