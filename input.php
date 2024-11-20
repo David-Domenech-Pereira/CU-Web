@@ -9,6 +9,14 @@ use Entity\Llum;
 use Entity\PhilipsAdapter;
 use Entity\ThermSensation\ThermSensationCalculationService;
 
+//llegim config.json
+$config = json_decode(file_get_contents('config.json'), true);
+$automatic = $config['automatic'];
+if ($automatic == 0) {
+    echo "{\"status\": \"ok\"}";
+    return;
+}
+
 $body= file_get_contents('php://input'); //Recogemos el body de la petición que hemos recibido en el input
 //echo $body;
 ////ho escrivim en un fitxer
