@@ -13,12 +13,12 @@ class ColorCalculationService
     const TEMP_NORMAL_CALOR = 25;
     const TEMP_FRED_NORMAL = 17;
 
-    const COLOR_BLAU = [0, 0, 255];
-    const COLOR_LILA = [140, 14, 255];
-    const COLOR_VERD = [0, 255, 0];
-    const COLOR_FRED_NIT = [255, 0, 0]; //fred
-    const COLOR_NORMAL_NIT = [243, 94, 14]; //normal
-    const COLOR_CALOR_NIT = [177, 63, 137]; //calor
+    const COLOR_CALOR_DIA = [0, 0, 255]; //calor - blau
+    const COLOR_FRED_DIA = [140, 14, 255]; //fred - lila
+    const COLOR_NORMAL_DIA = [0, 255, 0]; //normal - verd
+    const COLOR_FRED_NIT = [255, 0, 0]; //fred - vermell
+    const COLOR_NORMAL_NIT = [243, 94, 14]; //normal - taronja
+    const COLOR_CALOR_NIT = [177, 63, 137]; //calor - rosa
 
     const HORA_SURT_SOL = 6;
     const HORA_POSA_SOL = 20;
@@ -40,11 +40,11 @@ class ColorCalculationService
     private function generateDayColour(float $sensacioTermica): array
     {
         if ($sensacioTermica >= self::TEMP_NORMAL_CALOR) {
-            return self::COLOR_BLAU;
+            return self::COLOR_CALOR_DIA;
         } elseif ($sensacioTermica < self::TEMP_FRED_NORMAL) {
-            return self::COLOR_LILA;
+            return self::COLOR_FRED_DIA;
         } else {
-            return self::COLOR_VERD;
+            return self::COLOR_NORMAL_DIA;
         }
     }
 
