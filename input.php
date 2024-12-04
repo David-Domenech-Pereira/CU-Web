@@ -12,6 +12,14 @@ use Entity\PhilipsAdapter;
 use Entity\ThermSensation\ThermSensationCalculationService;
 
 //llegim config.json
+//si existeix
+if (!file_exists('config.json')) {
+    $config = [
+        "automatic" => 1
+    ];
+
+    file_put_contents('config.json', json_encode($config));
+}
 $config = json_decode(file_get_contents('config.json'), true);
 $automatic = $config['automatic'];
 if ($automatic == 0) {

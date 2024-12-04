@@ -37,7 +37,7 @@ $isAutomatic = $config['automatic'] == 1;
         <div class="card-body">
             <form action="form.php" method="post">
                 <div class="form-check form-switch">
-                    <input class="form-check-input" <?php echo  $config['automatic'] == 1 ? "checked":""; ?> name="automatic" type="checkbox" role="switch" id="automatic">
+                    <input class="form-check-input" <?php echo  $isAutomatic ? "checked":""; ?> name="automatic" type="checkbox" role="switch" id="automatic">
                     <label class="form-check-label" for="automatic">Mode Automátic</label>
                 </div>
                 <label for="intensitat" class="form-label">Intensitat</label>
