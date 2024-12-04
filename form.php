@@ -14,6 +14,8 @@ $calor = $_POST['calor'];
 $intensitat = $_POST['intensitat'];
 $color = $_POST['color'];
 
+$color = str_replace('#', '', $color);
+$color = str_split($color, 2);
 
 
 $llumSend = [];
@@ -21,9 +23,9 @@ for ($i=0; $i < Llum::NUM_LLUMS; $i++) {
     $llumSend[$i] = new Llum();
     $llumSend[$i]->setIntensitat($intensitat);
 
-    $llumSend[$i]->setcolorR((int) $color[0]);
-    $llumSend[$i]->setcolorG((int) $color[1]);
-    $llumSend[$i]->setcolorB((int) $color[2]);
+    $llumSend[$i]->setcolorR(hexdec($color[0]));
+    $llumSend[$i]->setcolorG(hexdec($color[1]));
+    $llumSend[$i]->setcolorB(hexdec($color[2]));
 
     $llumSend[$i]->setTipusLlumunositat($calor);
 }
