@@ -45,7 +45,7 @@ $isAutomatic = $config['automatic'] == 1;
                 <label for="calor" class="form-label">Calor</label>
                 <input type="range" name="calor" class="form-range" id="calor" value="<?php echo $config['calor'] ?>">
                 <label for="color" class="form-label">Color picker</label>
-                <input type="color" name="color" class="form-control form-control-color" id="color" value="#563d7c"
+                <input type="color" name="color" class="form-control form-control-color" id="color"
                        title="Choose your color" value="<?php echo $config['color'] ?>">
                 <input type="submit" class="btn btn-primary mt-3" value="Enviar">
             </form>
