@@ -12,9 +12,9 @@ if (isset($_POST['automatic']) && $_POST['automatic']) {
 }
 $calor = $_POST['calor'];
 $intensitat = $_POST['intensitat'];
-$color = $_POST['color'];
+$color_hexa = $_POST['color'];
 
-$color = str_replace('#', '', $color);
+$color = str_replace('#', '', $color_hexa);
 $color = str_split($color, 2);
 
 
@@ -30,7 +30,7 @@ for ($i=0; $i < Llum::NUM_LLUMS; $i++) {
     $llumSend[$i]->setTipusLlumunositat($calor);
 }
 
-file_put_contents('config.json', json_encode(['automatic' => $automatic, 'color' => $color, 'intensitat' => $intensitat, 'calor' => $calor]));
+file_put_contents('config.json', json_encode(['automatic' => $automatic, 'color' => $color_hexa, 'intensitat' => $intensitat, 'calor' => $calor]));
 
 $philipsadapter = new PhilipsAdapter();
 $philipsadapter->write($llumSend);
