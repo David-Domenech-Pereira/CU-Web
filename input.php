@@ -5,6 +5,8 @@ require 'vendor/autoload.php';  //comunica al php que existeixen les classes
 
 use Entity\ArduinoAdapter;
 use Entity\ColorCalculation\ColorCalculationService;
+use Entity\FilePersistence\FilePersistenceRequest;
+use Entity\FilePersistence\FilePersistenceService;
 use Entity\Llum;
 use Entity\PhilipsAdapter;
 use Entity\ThermSensation\ThermSensationCalculationService;
@@ -17,12 +19,9 @@ if ($automatic == 0) {
     return;
 }
 
+$error = "";
+
 $body= file_get_contents('php://input'); //Recogemos el body de la petición que hemos recibido en el input
-//echo $body;
-////ho escrivim en un fitxer
-//$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
-//fwrite($myfile, $body);
-//fclose($myfile);
 
 $arduinoadapter = new ArduinoAdapter(); //Creamos un objeto de la clase ArduinoAdapter
 
@@ -54,9 +53,20 @@ for ($i=0; $i < Llum::NUM_LLUMS; $i++) {
     $llumSend[$i]->setTipusLlumunositat($color->getTipusLlumunositat());
 }
 
+try{
+    $philipsadapter = new PhilipsAdapter();
+    $philipsadapter->write($llumSend);
+}catch(Exception $e){
+    $error = $e->getMessage();
+}
 
-$philipsadapter = new PhilipsAdapter();
-$philipsadapter->write($llumSend);
+$filePersistenceService = new FilePersistenceService();
+$filePersistenceRequest = new FilePersistenceRequest($ambient, $llumSend, $sensacioTermica);
+$filePersistenceService->persist($filePersistenceRequest);
 
+if ($error != ""){
+    echo "{\"status\": \"error\", \"message\": \"$error\"}";
+    return;
+}
 echo "{\"status\": \"ok\"}";
 ?>
