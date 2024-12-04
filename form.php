@@ -5,7 +5,7 @@ use Entity\PhilipsAdapter;
 
 require 'vendor/autoload.php';
 
-if (isset($_POST['automatic'])) {
+if (isset($_POST['automatic']) && $_POST['automatic']) {
     $automatic = $_POST['automatic'];
 } else {
     $automatic = 0;
