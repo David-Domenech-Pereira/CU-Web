@@ -2,8 +2,21 @@
 
 namespace Entity\FilePersistence;
 
+use mysqli;
+
 class FilePersistenceService
 {
+    private function connect()
+    {
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "cu_practica";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        return $conn;
+    }
     /**
      * Lògica per persistir les dades en un fitxer.
      *
@@ -14,53 +27,25 @@ class FilePersistenceService
      */
     public function persist(FilePersistenceRequest $request)
     {
-        if (!file_exists("data.json")) {
-            file_put_contents("data.json", "[]");
-        }
+        $temp = $request->getAmbient()->getTemp();
+        $humitat = $request->getAmbient()->getHumitat();
+        $llum = $request->getAmbient()->getLlum();
+        $sensacioTermica = $request->getSensacioTermica();
 
-        $actualContent = file_get_contents("data.json");
+        $sql = "INSERT INTO ambient (temp, humitat, llum, sensacioTermica) VALUES (?, ?, ?, ?)";
+        $conn = $this->connect();
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("dddd", $temp, $humitat, $llum, $sensacioTermica);
 
-        $data = $this->jsonParser($request);
-
-        $actualContent = json_decode($actualContent, true);
-
-        //només ens quedem amb les 100 últimes
-        $actualContent  = array_slice($actualContent, -100);
-
-        $actualContent[] = $data;
-
-        file_put_contents("data.json", json_encode($actualContent));
+        $stmt->execute();
     }
 
-    /**
-     * Transforma les dades rebudes en un array associatiu per a posar en un json.
-     *
-     * @param FilePersistenceRequest $request Dades a transformar
-     * @return array
-     */
-    private function jsonParser(FilePersistenceRequest $request): array
+    public function get()
     {
-        $data = [];
-        $data["temp"] = $request->getAmbient()->getTemp();
-        $data["humitat"] = $request->getAmbient()->getHumitat();
-        $data["llum"] = $request->getAmbient()->getLlum();
+        $sql = "SELECT * FROM ambient";
+        $conn = $this->connect();
+        $result = $conn->query($sql);
 
-        $llums = $request->getLlums();
-        $data["llums"] = [];
-        foreach ($llums as $llum) {
-            $data["llums"][] = [
-                "intensitat" => $llum->getIntensitat(),
-                "colorR" => $llum->getcolorR(),
-                "colorG" => $llum->getcolorG(),
-                "colorB" => $llum->getcolorB(),
-                "tipusLlumunositat" => $llum->getTipusLlumunositat()
-            ];
-        }
-
-        $data["sensacioTermica"] = $request->getSensacioTermica();
-
-        $data["timestamp"] = time();
-
-        return $data;
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }

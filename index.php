@@ -3,6 +3,8 @@ require 'vendor/autoload.php';
 
 use Entity\Ambient;
 
+$filePersistenceService = new \Entity\FilePersistence\FilePersistenceService();
+
 $values = file_get_contents('config.json');
 $config = json_decode($values, true);
 if (!isset($config['automatic'])) {
@@ -26,12 +28,12 @@ $isAutomatic = $config['automatic'] == 1;
 $existingData = file_get_contents('data.json');
 
 if ($existingData) {
-    $data = json_decode($existingData, true);
+    $data = $filePersistenceService->get();
 
     $timestamps = array_column($data, 'timestamp');
     //transform timestamp to human readable format
     foreach ($timestamps as $key => $timestamp) {
-        $data[$key]['timestamp'] = date('H:i', $timestamp);
+        $data[$key]['timestamp'] = date('H:i', (int) $timestamp);
     }
 } else {
     $data = [];
@@ -78,6 +80,9 @@ if ($existingData) {
     <div class="row mt-2">
         <div class="col-md-6">
     <canvas id="llumsChart" width="200" height="100"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="sensTermChart" width="200" height="100"></canvas>
         </div>
     </div>
 </div>
@@ -158,4 +163,47 @@ if ($existingData) {
             }
         }
     });
+
+    const ctx4 = document.getElementById('sensTermChart').getContext('2d');
+    const sensTermChart = new Chart(ctx4, {
+        type: 'line', // tipo de gráfico (línea)
+        data: {
+            labels: <?php echo json_encode(array_column($data, 'timestamp')); ?>, // etiquetas (horas)
+            datasets: [
+                {
+                    label: 'Sensacio Termica (ºC)',
+                    data: <?php echo json_encode(array_column($data, 'sensacioTermica')); ?>, // datos (temperaturas)
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+
+    function updateChart(chart, url, chartType) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            chart.data.labels = data.timestamp;
+            chart.data.datasets[0].data = data.data;
+            chart.update();
+        })
+        .catch(error => console.error('Error updating chart:', error));
+}
+
+setInterval(() => {
+    updateChart(temperatureChart, 'chartUpdate.php?chart=temp', 'temperatureChart');
+    updateChart(humitatChart, 'chartUpdate.php?chart=humitat', 'humitatChart');
+    updateChart(llumsChart, 'chartUpdate.php?chart=llum', 'llumsChart');
+    updateChart(sensTermChart, 'chartUpdate.php?chart=sensacioTermica', 'sensTermChart');
+}, 10000);
 </script>

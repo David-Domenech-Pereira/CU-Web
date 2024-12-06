@@ -5,7 +5,8 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=8.0",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "ext-mysqli": "*"
   },
   "autoload": {
     "psr-4": {
