@@ -29,7 +29,7 @@ class ArduinoAdapter implements SensorAdapter{
 
     private function verifySignature(Ambient $ambient, string $signature){
         //temp, humitat i llum concatenades + AES = signatura
-        $operacio = round($signature / (self::PRIVATE_KEY/100),2);
+        $operacio = round($signature / (self::PRIVATE_KEY),2);
         $sum= $ambient->getTemp() + $ambient->getHumitat() + $ambient->getLlum();
 
         return $operacio == $sum;
