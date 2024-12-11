@@ -36,7 +36,7 @@ if ($ambient->getTemp() > 15) {
     $sensacioTermica = $ambient->getTemp();
 }
 
-$hora = 22;
+$hora = date('H');
 
 $colorCalculationService = new ColorCalculationService();
 $color = $colorCalculationService->execute($sensacioTermica, $hora);
