@@ -21,7 +21,7 @@ class ArduinoAdapter implements SensorAdapter{
         $ambient->setLlum($llum);
 
         if (!$this->verifySignature($ambient, $signature)){
-            throw new \Exception("Error en la signatura, ens arriba: $signature i la calculada hauria de ser: ".round($signature / (self::PRIVATE_KEY),2));
+            throw new \Exception("Error en la signatura, ens arriba: ".round($signature / (self::PRIVATE_KEY),2)." i hauria de ser: ".($ambient->getTemp() + $ambient->getHumitat() + $ambient->getLlum()));
         }
 
         return $ambient;
@@ -30,7 +30,7 @@ class ArduinoAdapter implements SensorAdapter{
     private function verifySignature(Ambient $ambient, string $signature){
         //temp, humitat i llum concatenades + AES = signatura
         $operacio = round($signature / (self::PRIVATE_KEY),2);
-        $sum= $ambient->getTemp() + $ambient->getHumitat() + $ambient->getLlum();
+        $sum= round($ambient->getTemp() + $ambient->getHumitat() + $ambient->getLlum(),2);
 
         return $operacio == $sum;
     }
