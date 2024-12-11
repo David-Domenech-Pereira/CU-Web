@@ -21,7 +21,7 @@ class ArduinoAdapter implements SensorAdapter{
         $ambient->setLlum($llum);
 
         if (!$this->verifySignature($ambient, $signature)){
-            throw new \Exception("Error en la signatura, ens arriba: $signature i la calculada hauria de ser: ".round($signature / (self::PRIVATE_KEY),2));
+            throw new \Exception("Error en la signatura");
         }
 
         return $ambient;
