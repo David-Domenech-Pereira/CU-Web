@@ -2,7 +2,7 @@
 namespace Entity;
 
 class ArduinoAdapter implements SensorAdapter{
-    private const PRIVATE_KEY = 52039977;
+    private const PRIVATE_KEY = 520397;
     public function adapt(string $request):Ambient{
         [
             "temp" => $temp,
