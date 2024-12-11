@@ -205,5 +205,5 @@ setInterval(() => {
     updateChart(humitatChart, 'chartUpdate.php?chart=humitat', 'humitatChart');
     updateChart(llumsChart, 'chartUpdate.php?chart=llum', 'llumsChart');
     updateChart(sensTermChart, 'chartUpdate.php?chart=sensacioTermica', 'sensTermChart');
-}, 10000);
+}, 1000);
 </script>

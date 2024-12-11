@@ -46,6 +46,8 @@ class FilePersistenceService
         $conn = $this->connect();
         $result = $conn->query($sql);
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $results = $result->fetch_all(MYSQLI_ASSOC);
+        //donem la volta a l'array perquè el primer element sigui el més antic
+        return array_reverse($results);
     }
 }
