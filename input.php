@@ -20,12 +20,6 @@ if (!file_exists('config.json')) {
 
     file_put_contents('config.json', json_encode($config));
 }
-$config = json_decode(file_get_contents('config.json'), true);
-$automatic = $config['automatic'];
-if ($automatic == 0) {
-    echo "{\"status\": \"ok\"}";
-    return;
-}
 
 $error = "";
 
@@ -61,16 +55,23 @@ for ($i=0; $i < Llum::NUM_LLUMS; $i++) {
     $llumSend[$i]->setTipusLlumunositat($color->getTipusLlumunositat());
 }
 
+$filePersistenceService = new FilePersistenceService();
+$filePersistenceRequest = new FilePersistenceRequest($ambient, $llumSend, $sensacioTermica);
+$filePersistenceService->persist($filePersistenceRequest);
+
+$config = json_decode(file_get_contents('config.json'), true);
+$automatic = $config['automatic'];
+if ($automatic == 0) {
+    echo "{\"status\": \"ok\"}";
+    return;
+}
+
 try{
     $philipsadapter = new PhilipsAdapter();
     $philipsadapter->write($llumSend);
 }catch(Exception $e){
     $error = $e->getMessage();
 }
-
-$filePersistenceService = new FilePersistenceService();
-$filePersistenceRequest = new FilePersistenceRequest($ambient, $llumSend, $sensacioTermica);
-$filePersistenceService->persist($filePersistenceRequest);
 
 if ($error != ""){
     echo "{\"status\": \"error\", \"message\": \"$error\"}";
