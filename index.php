@@ -49,8 +49,12 @@ if ($existingData) {
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<div class="container m-3">
+<div class="container m-md-3 m-sm-auto">
     <h1>Sistema automàtic de control de llum</h1>
+    <div class="alert alert-warning" role="alert">
+        <p class="alert-heading"><b>Benvingut!</b></p>
+        <p>Recorda fer click a enviar per a aplicar els canvis al sistema.</p>
+    </div>
     <div class="card">
         <div class="card-body">
             <form action="form.php" method="post">
