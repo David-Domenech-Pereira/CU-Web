@@ -42,7 +42,7 @@ class FilePersistenceService
 
     public function get()
     {
-        $sql = "SELECT * FROM ambient";
+        $sql = "SELECT * FROM ambient ORDER BY timestamp DESC LIMIT 50";
         $conn = $this->connect();
         $result = $conn->query($sql);
 
